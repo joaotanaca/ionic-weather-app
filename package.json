@@ -23,8 +23,11 @@
     "puppeteer": "^10.0.0"
   },
   "dependencies": {
+    "@alepop/stencil-env": "^0.4.1",
     "@capacitor/cli": "^3.2.3",
     "@capacitor/core": "^3.2.3",
-    "@capacitor/geolocation": "^1.1.0"
+    "@capacitor/geolocation": "^1.1.0",
+    "react": "^17.0.2",
+    "swr": "^1.0.1"
   }
 }

@@ -17,7 +17,9 @@
       "services/*": ["./src/services/*"],
       "lib/*": ["./src/lib/*"],
       "interfaces/*": ["./src/interfaces/*"],
-      "assets/*": ["./src/assets/*"]
+      "assets/*": ["./src/assets/*"],
+      "helpers/*": ["./src/helpers/*"],
+      "hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"],
