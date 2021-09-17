@@ -14,7 +14,9 @@
     "jsxFactory": "h",
     "paths": {
       "components/*": ["./src/components/*"],
-      "services/*": ["./src/services/*"]
+      "services/*": ["./src/services/*"],
+      "interfaces/*": ["./src/interfaces/*"],
+      "assets/*": ["./src/assets/*"]
     }
   },
   "include": ["src"],
