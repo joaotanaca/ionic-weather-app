@@ -1,10 +1,16 @@
 import { Component, h } from '@stencil/core';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   tag: 'app-home',
   styleUrl: 'app-home.css',
 })
 export class AppHome {
+  async componentDidLoad() {
+    let coordinates = await Geolocation.getCurrentPosition();
+    console.log(coordinates);
+  }
+
   render() {
     return [
       <ion-header>

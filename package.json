@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@capacitor/cli": "^3.2.3",
-    "@capacitor/core": "^3.2.3"
+    "@capacitor/core": "^3.2.3",
+    "@capacitor/geolocation": "^1.1.0"
   }
 }
