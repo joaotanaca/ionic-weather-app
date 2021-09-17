@@ -1,5 +1,6 @@
 import { Component, h } from '@stencil/core';
 import { Geolocation } from '@capacitor/geolocation';
+import { SettingsData } from 'services/settings-data';
 
 @Component({
   tag: 'app-home',
@@ -9,6 +10,7 @@ export class AppHome {
   async componentDidLoad() {
     let coordinates = await Geolocation.getCurrentPosition();
     console.log(coordinates);
+    await SettingsData.setCoords(coordinates.coords.latitude, coordinates.coords.longitude);
   }
 
   render() {
