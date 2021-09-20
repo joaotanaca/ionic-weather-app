@@ -19,12 +19,12 @@ class WeatherDataController {
     let response: Response;
     try {
       if (location.useCoords) {
-        response = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&appid=511b8750c2d1fe59a7aac99a987cca55`);
+        response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&appid=511b8750c2d1fe59a7aac99a987cca55`);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
       } else {
-        response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location.name}&appid=511b8750c2d1fe59a7aac99a987cca55`);
+        response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location.name}&appid=511b8750c2d1fe59a7aac99a987cca55`);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
