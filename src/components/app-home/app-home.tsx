@@ -9,6 +9,7 @@ import { WeatherData } from 'services/weather-data';
   styleUrl: 'app-home.css',
 })
 export class AppHome {
+  @State() weatherIcon: string = 'thermometer';
   @State() weather: WeatherResponse = {
     base: '',
     clouds: null,
@@ -31,14 +32,53 @@ export class AppHome {
     wind: null,
   };
 
+  async refresherHandler(event?) {
+    try {
+      this.weather = await WeatherData.refreshWeather();
+    } catch (err) {
+      console.log(err);
+    }
+    this.setWeatherIcon();
+    if (event) {
+      event.target.complete();
+    }
+  }
+
+  setWeatherIcon() {
+    let description = this.weather.weather[0].description;
+
+    if (description)
+      if (description.includes('lightning') || description.includes('thunder')) {
+        this.weatherIcon = 'thunderstorm';
+      } else if (description.includes('wind')) {
+        this.weatherIcon = 'flag';
+      } else if (description.includes('rain') || description.includes('shower')) {
+        this.weatherIcon = 'rainy';
+      } else if (description.includes('snow') || description.includes('frost')) {
+        this.weatherIcon = 'snow';
+      } else if (description.includes('cloud')) {
+        this.weatherIcon = 'cloudy';
+      } else if (description.includes('sun') || description.includes('clear')) {
+        this.weatherIcon = 'sunny';
+      } else {
+        this.weatherIcon = 'thermometer';
+      }
+  }
+
   async componentDidLoad() {
     let coordinates = await Geolocation.getCurrentPosition();
+    const router = document.querySelector('ion-router');
+
     await SettingsData.setCoords(coordinates.coords.latitude, coordinates.coords.longitude);
     try {
       this.weather = await WeatherData.getCurrentWeather();
     } catch (err) {
       console.log(err);
     }
+    router.addEventListener('ionRouteDidChange', () => {
+      this.refresherHandler();
+    });
+    this.setWeatherIcon();
   }
 
   render() {
@@ -55,9 +95,15 @@ export class AppHome {
       </ion-header>,
 
       <ion-content class="ion-padding">
+        <ion-refresher slot="fixed" onIonRefresh={this.refresherHandler}>
+          <ion-refresher-content />
+        </ion-refresher>
         <div class="weather-display">
-          <h1>{this.weather.main.temp}&#176;</h1>
-          <p>{this.weather.weather[0].description}</p>
+          <ion-icon name={this.weatherIcon} />
+          <div class="temperature">
+            <h1>{this.weather.main.temp}&#176;</h1>
+            <p>{this.weather.weather[0].description}</p>
+          </div>
           <ion-card>
             <ion-card-header>
               <ion-card-subtitle>{this.weather.name}</ion-card-subtitle>
