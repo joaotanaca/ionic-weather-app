@@ -1,4 +1,3 @@
-import { env } from '@alepop/stencil-env';
 import { Config } from '@stencil/core';
 
 export const config: Config = {
@@ -12,5 +11,4 @@ export const config: Config = {
       copy: [{ src: '_redirects' }],
     },
   ],
-  plugins: [env()],
 };
